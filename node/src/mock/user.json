@@ -1,0 +1,37 @@
+[
+        {
+                "name": "lucy",
+                "sex": "女",
+                "age": "21",
+                "adress": "山西",
+                "pwd": "11"
+        },
+        {
+                "name": "tom",
+                "pwd": "11",
+                "sex": "男",
+                "age": "28",
+                "adress": " 俄罗斯"
+        },
+        {
+                "name": "lili",
+                "pwd": "11",
+                "sex": "女",
+                "age": "25",
+                "adress": "俄罗斯"
+        },
+        {
+                "name": "san",
+                "pwd": "11",
+                "sex": "女",
+                "age": "25",
+                "adress": "石家庄"
+        },
+        {
+                "name": "sasa",
+                "pwd": "11",
+                "sex": "女",
+                "age": "23",
+                "adress": "石家庄"
+        }
+]

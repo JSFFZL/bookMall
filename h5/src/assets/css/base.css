@@ -1,0 +1,19 @@
+@import "./normalize.css";
+
+html,body,div,p,a,span,h1,h2,h3{
+        box-sizing: border-box;
+        font-size: 16px;
+}
+
+/* :root  -> 获取根元素html */
+/*  定义变量 */
+/*  使用 var(变量名) */
+:root{
+        --color-text:#666;
+        --color-high-text:#999;
+        --color-tint:blue;
+        --font-size:14px;
+        --line-height:1.5;
+}
+
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/libs/axios.js"></script>
+</head>
+
+<body>
+    <ul>
+        <!-- <li><label for="">
+                成员姓名：<input type="text" placeholder="">
+            </label></li>
+        <li> <label for="">
+                性别：<input type="text" placeholder="">
+            </label></li>
+        <li> <label for="">
+                年龄：<input type="text" placeholder="">
+            </label></li>
+        <li> <label for="">
+                地址：<input type="text" placeholder="">
+            </label></li>
+            <li><button></button></li> -->
+    </ul>
+
+    <script>
+        let uid = sessionStorage.getItem("uid");
+
+        axios.get("/listOne", {
+            params: {
+                uid: uid
+            }
+        }).then((res) => {
+            render(res.data)
+        })
+
+        function render(s) {
+            let str = `<li><label for="">
+                成员姓名：<input type="text" class="name" placeholder="${s.name}">
+            </label></li>
+        <li> <label for="">
+                性别：<input type="text" class="sex" placeholder="${s.sex}">
+            </label></li>
+        <li> <label for="">
+                年龄：<input type="text" class="age"  placeholder="${s.age}">
+            </label></li>
+        <li> <label for="">
+                地址：<input type="text" class="address"  placeholder="${s.address}">
+            </label></li>
+            <li><button class="updata">修改</button></li>`;
+
+            document.querySelector("ul").innerHTML = str;
+            val();
+        }
+
+        function val() {
+            document.querySelector(".updata").onclick = function () {
+                let name = document.querySelector(".name").value || document.querySelector(".name").getAttribute("placeholder");
+                let sex = document.querySelector(".sex").value || document.querySelector(".sex").getAttribute("placeholder");
+                let age = document.querySelector(".age").value || document.querySelector(".age").getAttribute("placeholder");
+                let address = document.querySelector(".address").value || document.querySelector(".address").getAttribute("placeholder");
+                console.log(name, sex , age , address);
+
+                axios.post("/updata",{
+                    id:uid,
+                    name:name,
+                    sex:sex,
+                    age:age,
+                    address:address
+                }).then((res)=>{
+                    console.log(res);
+                    if(res.data.code == 0){
+                        alert(res.data.msg);
+                        location.href = "index.html";
+                    }
+                })
+            }
+
+
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>

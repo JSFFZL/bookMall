@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/libs/axios.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h3>成员管理系统</h3>
+        <ul class="list">
+            <!-- <li>高泽康 <button>查看</button><button>删除</button></li> -->
+        </ul>
+        <p><input type="button" value="添加成员" class="add" /></p>
+    </div>
+
+    <script>
+
+        (function () {
+            // 发送请求
+            axios.get("/list", {
+                params: {}
+            }).then((res) => {
+                console.log(res.data);
+                render(res.data);
+            })
+        })();
+
+        document.querySelector(".add").onclick = function () {
+            location.href = "add.html";
+        }
+
+        // 渲染
+        function render(s) {
+            let str = "";
+            s.forEach(element => {
+                str += `<li data-id="${element.id}">${element.name}
+                    <button id="look">查看</button><button id="del">删除</button></li>`
+            });
+            document.querySelector(".list").innerHTML = str;
+            onClick();
+        }
+
+        function onClick() {
+
+            let look = [...document.querySelectorAll("#look")];
+            let del = [...document.querySelectorAll("#del")];
+
+            // 查看
+            look.forEach((item, i) => {
+                item.onclick = function () {
+                    // 存在本地缓存
+                    sessionStorage.setItem("uid", i);
+                    // 跳转查看页面
+                    location.href = "look.html";
+                }
+            })
+            // 删除
+            del.forEach((item, i) => {
+                item.onclick = function () {
+                    axios.get("/del", {
+                        params: {
+                            uid: i
+                        }
+                    }).then((res) => {
+                        if (res.data.code == 0) {
+                            alert(res.data.msg);
+                            // 节点删除
+                            // item.parentNode.remove();
+                            // 刷新页面4大方法
+                            location = location;
+                            // // location.reload();
+                            // // history.go(0);
+                            // location.href = "";
+                        } else {
+                            alert(res.data.msg)
+                        }
+                    })
+                }
+            })
+
+        }
+    </script>
+</body>
+
+</html>

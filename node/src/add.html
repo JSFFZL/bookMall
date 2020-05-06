@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/libs/axios.js"></script>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <label for="">
+                * 成员姓名：<input type="text" placeholder="姓名" class="name">
+            </label>
+        </li>
+        <li>
+            <label for="">
+                * 性别：<input type="text" placeholder="性别" class="sex">
+            </label>
+        </li>
+        <li>
+            <label for="">
+                * 地址：<input type="text" placeholder="地址" class="address">
+            </label>
+        </li>
+        <li>
+            <label for="">
+                * 年龄：<input type="text" placeholder="年龄" class="age">
+            </label>
+        </li>
+        <li><button class="ok">添加</button></li>
+    </ul>
+
+    <script>
+
+        document.querySelector(".ok").onclick = function () {
+            let name = document.querySelector(".name").value;
+            let sex = document.querySelector(".sex").value;
+            let address = document.querySelector(".address").value;
+            let age = document.querySelector(".age").value;
+            console.log(name, sex, address, age);
+            if(name && sex && address && age){
+                axios.post("/add",{
+                    name:name,
+                    sex:sex,
+                    age:age,
+                    address:address
+                }).then((res)=>{
+                    console.log(res.data.code);
+                    if(res.data.code == 0){ 
+                        alert(res.data.msg);
+                        location.href = "index.html";
+                    }else{
+                        alert(res.data.msg);
+                    }
+                })
+            }else{
+                alert("缺少参数！！！")
+            }
+        }
+    </script>
+
+</body>
+
+</html>
